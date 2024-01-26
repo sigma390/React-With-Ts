@@ -4,7 +4,7 @@ import goalsImg from './assets/goals.jpg'
 import  {CourseGoal } from './components/CourseGoal';
 import { useState } from "react";
 
-type Goal = {
+export type Goal = {
     title:string;
     description:string;
     id:number;
@@ -30,13 +30,7 @@ export default function App() {
       </Header>
       
       <button onClick={handleAddGoal}>Add goal</button>
-      <ul>
-      {goals.map((goal)=>{
-        return<li key={goal.id}>
-          <CourseGoal title={goal.title} description={goal.description} children />
-        </li>
-      })}
-      </ul>
+      
       
       
       
