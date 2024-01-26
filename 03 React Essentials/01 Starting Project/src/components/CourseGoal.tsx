@@ -1,6 +1,6 @@
 
 
-import React, { type PropsWithChildren, ReactNode } from 'react'
+import React, { type PropsWithChildren, ReactNode, FC } from 'react'
 
 //=======> 1st appproach <===============
 interface CourseGoalProps{
@@ -11,7 +11,7 @@ interface CourseGoalProps{
 // ================> 2n Approach <=================
 // type CourseGoalProps = PropsWithChildren
 
-export const CourseGoal = ({title,description}:CourseGoalProps) => {
+export const CourseGoal:FC<CourseGoalProps> = ({title,description}) => {
   return (
     <article>
         <div>
