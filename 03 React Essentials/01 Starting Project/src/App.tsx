@@ -3,6 +3,7 @@ import { Header } from "./components/Header.tsx";
 import goalsImg from './assets/goals.jpg'
 import  {CourseGoal } from './components/CourseGoal';
 import { useState } from "react";
+import CourseGoalList from './components/CourseGoalList';
 
 export type Goal = {
     title:string;
@@ -23,6 +24,11 @@ export default function App() {
         return [...prevGoals,newGoal]
     });
   }
+
+  //delete goal
+  function handleDeleteGoal(id:number){
+    setGoals(prevGoals=> prevGoals.filter((goal)=> goal.id!=id))
+  }
   return (
     <main>
       <Header image={{src: goalsImg,alt:'this is Image'}}>
@@ -30,6 +36,7 @@ export default function App() {
       </Header>
       
       <button onClick={handleAddGoal}>Add goal</button>
+      <CourseGoalList goals = {goals} onDeleteGoal={handleDeleteGoal}/>
       
       
       
