@@ -1,12 +1,16 @@
 
-import React from 'react'
+import React, { type FormEvent } from 'react'
 import { Goal } from '../App';
 
 
-
+ 
 const NewGoal = () => {
+
+  function handleSubmit(e:FormEvent){
+    e.preventDefault();
+  }
   return (
-    <form >
+    <form onSubmit={handleSubmit} >
       <p>
         <label htmlFor='goal'>
           Your Goal
@@ -22,7 +26,9 @@ const NewGoal = () => {
         
       </p>
 
-
+      <p>
+        <button>Add goal</button>
+      </p>
 
     </form>
   )
