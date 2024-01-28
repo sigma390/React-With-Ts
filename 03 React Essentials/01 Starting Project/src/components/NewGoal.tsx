@@ -1,13 +1,24 @@
 
-import React, { type FormEvent } from 'react'
+import React, { useRef, type FormEvent } from 'react'
 import { Goal } from '../App';
 
-
+type NewGoalProps = {
+  onAddGoal:(goal:string,summary:string)=>void;
+}
  
-const NewGoal = () => {
+const NewGoal = ({onAddGoal}:NewGoalProps) => {
+  // refs 
+  const goal = useRef<HTMLInputElement>(null);
+  const summary = useRef<HTMLInputElement>(null);
 
-  function handleSubmit(e:FormEvent){
+
+
+  function handleSubmit(e:FormEvent <HTMLFormElement>){
     e.preventDefault();
+    const enteredGoal = goal.current!.value;
+    const enteredSummary = summary.current!.value;
+
+    onAddGoal(enteredGoal,enteredSummary);
   }
   return (
     <form onSubmit={handleSubmit} >
@@ -15,14 +26,14 @@ const NewGoal = () => {
         <label htmlFor='goal'>
           Your Goal
         </label>
-        <input type='text' id='goal'/>
+        <input type='text' id='goal' ref = {goal}/>
         
       </p>
       <p>
         <label htmlFor='summary'>
           Description
         </label>
-        <input type='text' id='summary'/>
+        <input type='text' id='summary' ref={summary}/>
         
       </p>
 
