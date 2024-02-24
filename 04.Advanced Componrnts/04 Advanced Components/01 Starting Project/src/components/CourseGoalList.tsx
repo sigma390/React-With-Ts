@@ -14,20 +14,34 @@ export default function CourseGoalList({
 }: CourseGoalListProps) {
   //check based on goals
 
-  if (goals.length== 0) {
-   <InfoBox mode='hint' >
-    You have no Course Goals Add some!!!!
+  if (goals.length === 0) {
+    return(
+      <InfoBox mode='hint' >
+    You have no Goals Add some!!!!
 
    </InfoBox>
+
+
+    )
+   
     
   }
 
   let warningBox:ReactNode;
 
   if (goals.length>=4) {
+    warningBox = <InfoBox mode='warning' severity='low'>Too 
+    Much Goals</InfoBox>
+  }
+  if (goals.length>=10) {
     warningBox = <InfoBox mode='warning' severity='medium'>Too 
     Much Goals</InfoBox>
   }
+  if (goals.length>=15) {
+    warningBox = <InfoBox mode='warning' severity='high'>Too 
+    Much Goals</InfoBox>
+  }
+
 
   return (
     <>
