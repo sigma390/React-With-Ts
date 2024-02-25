@@ -7,11 +7,13 @@ function App() {
 
     <Input label='Enter age' id='age'/>
 
+    
+
     <p>
-      <Button el='button'>A button</Button>  
+      <Button >A button</Button>  
     </p>
     <p>
-      <Button el='anchor' href='https://github.com/'>A Link</Button>
+      <Button href='https://github.com/'>A Link</Button>
     </p>
 
 
