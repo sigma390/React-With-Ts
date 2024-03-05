@@ -1,5 +1,6 @@
 import { Input } from './Components/Input';
 import { Button } from './Components/Button';
+import Container from './Components/Container';
 function App() {
   return (<main>
 
@@ -15,6 +16,9 @@ function App() {
     <p>
       <Button href='https://github.com/'>A Link</Button>
     </p>
+
+
+    <Container as={Button}/>
 
 
 

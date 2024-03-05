@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { ElementType } from 'react'
 
-const Container = () => {
-  return (
-    <div>Container</div>
-  )
+
+type ContainerProps = {
+     as:ElementType
+}
+
+
+const Container = ({as}:ContainerProps) => {
+    const Comp = as;
+  return <Comp/>
 }
 
 export default Container
