@@ -2,6 +2,13 @@ import { Input } from './Components/Input';
 import { Button } from './Components/Button';
 import Container from './Components/Container';
 function App() {
+
+  const handleClick = ()=>{
+    alert("Hii clicked here!!!!")
+  }
+
+
+
   return (<main>
 
     <Input label='Enter name' id='name' type='text' />
@@ -18,7 +25,8 @@ function App() {
     </p>
 
 
-    <Container as={Button}/>
+    <Container as={Button} onClick={handleClick}>Click me and test</Container>
+
 
 
 
