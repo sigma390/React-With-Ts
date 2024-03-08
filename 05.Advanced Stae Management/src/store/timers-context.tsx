@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 
 //typ timer
@@ -20,7 +20,19 @@ type TimersContextValue = TimerState &{
     stopTimers:()=>void;
 };
 
-const TimersContext = createContext<TimersContextValue | null>(null);
+export const TimersContext = createContext<TimersContextValue | null>(null);
+
+
+
+export function useTimersContext(){
+    const timerCtx = useContext(TimersContext);
+    if (timerCtx==null) {
+        throw new Error('Thats not possible!!!');
+    }
+    return timerCtx;
+}
+
+
 
 // type for TimerContextValue 
 type TimerContextProviderProps = {
