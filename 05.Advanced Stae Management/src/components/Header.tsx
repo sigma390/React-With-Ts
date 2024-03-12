@@ -11,8 +11,9 @@ export default function Header() {
   return (
     <header>
       <h1>ReactTimer</h1>
+      {/* accessing the functions satrt stop with onclick */}
 
-      <Button {timerCtx.isRunning?'Stop':'Start'}>Timers</Button>
+      <Button onClick={timerCtx.isRunning? timerCtx.stopTimers: timerCtx.startTimers} >{timerCtx.isRunning?'Stop':'Start'}Timers</Button>  
     </header>
   );
 }

@@ -138,11 +138,10 @@ export default function TimersContextProvider({children}:TimerContextProviderPro
     //centralised data
 
     const ctx:TimersContextValue = {
-        timers:[],
-        isRunning:false,
+        timers:timerState.timers,
+        isRunning:timerState.isRunning,
         addTimer(timerData){
             dispatch({type:'ADD_TIMER', payload:timerData});
-            //..
         },
         startTimers() {
             dispatch({type:'START_TIMERS'});
