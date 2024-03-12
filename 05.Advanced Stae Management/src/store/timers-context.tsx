@@ -51,9 +51,37 @@ type TimerContextProviderProps = {
 // Action Props will be of type literal
 // action is message we are sending with dispatch
 
-type Action = {
-    type: 'ADD_TIMER' | 'START_TIMER' | 'STOP_TIMER'
+
+
+//Right way
+
+type StartTimersAction = {
+    type:'START_TIMERS'
 }
+
+
+type StopTimersAction = {
+    type:'STOP_TIMERS'
+}
+
+
+type AddTimersAction = {
+    type:'ADD_TIMER';
+    payload:Timer // to create object
+}
+
+
+
+
+
+
+
+
+//Wrong wayy
+type Action = StartTimersAction | StopTimersAction | AddTimersAction;
+
+
+
 
 
 
@@ -62,9 +90,31 @@ type Action = {
 
 function timersReducer(state:TimerState,action:Action){
 
-    if (action.type==='START_TIMER') {
-        
+    if (action.type==='START_TIMERS') {
+        return {
+            ...state,
+            isRunning:true
+        }
     }
+    if (action.type==='STOP_TIMERS') {
+        return {
+            ...state,
+            isRunning:false
+        }
+    }
+    if (action.type==='ADD_TIMER') {
+        return {
+            ...state,
+            timers :[
+                ...state.timers,
+                {
+                    name:action.payload.name,
+                    duration:action.payload.duration
+                }
+            ]
+        }
+    }
+
 
 
 
@@ -91,15 +141,15 @@ export default function TimersContextProvider({children}:TimerContextProviderPro
         timers:[],
         isRunning:false,
         addTimer(timerData){
-            dispatch({type:'ADD_TIMER'});
+            dispatch({type:'ADD_TIMER', payload:timerData});
             //..
         },
         startTimers() {
-            dispatch({type:'START_TIMER'});
+            dispatch({type:'START_TIMERS'});
             
         },
         stopTimers() {
-            dispatch({type:'STOP_TIMER'});
+            dispatch({type:'STOP_TIMERS'});
             
         },
 
