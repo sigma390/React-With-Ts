@@ -1,39 +1,42 @@
 import { type ReactNode, createContext, useContext, useReducer } from "react";
 
 
-//typ timer
+//3. typ timer
 
 type Timer = {
     name:string,
     duration:number
 }
 
-// Timer State
+// 2.Timer State for context
 type TimerState = {
+    //data to be manipulated  by the methods
     isRunning:boolean,
     timers:Timer[]
 }
 
 //initial state for use reducer hook
-
+// 11the step
 const initialState:TimerState={
     isRunning:true,
     timers:[]
 }
 
 
-// type ContextValue
+// 4. type ContextValue
 type TimersContextValue = TimerState &{
+    //methods to call from anywhre
     addTimer:(timeData:Timer)=>void,
     startTimers:()=>void,
     stopTimers:()=>void;
 };
-
+//1st step
 export const TimersContext = createContext<TimersContextValue | null>(null);
 
 
-
+//8th step 
 export function useTimersContext(){
+    //use context simply add checking condition and return that Ctx
     const timerCtx = useContext(TimersContext);
     if (timerCtx==null) {
         throw new Error('Thats not possible!!!');
@@ -43,7 +46,7 @@ export function useTimersContext(){
 
 
 
-// type for TimerContextValue 
+//6.the step  type for TimerContextValue 
 type TimerContextProviderProps = {
     children:ReactNode
 }  
@@ -53,7 +56,7 @@ type TimerContextProviderProps = {
 
 
 
-//Right way
+// 13 the step Right way
 
 type StartTimersAction = {
     type:'START_TIMERS'
@@ -87,8 +90,9 @@ type Action = StartTimersAction | StopTimersAction | AddTimersAction;
 
 
 // reducer 
+//12 the step it recive two parameteres
 
-function timersReducer(state:TimerState,action:Action){
+function timersReducer(state:TimerState,action:Action){ //handle action and change state  appropriatly
 
     if (action.type==='START_TIMERS') {
         return {
@@ -114,7 +118,7 @@ function timersReducer(state:TimerState,action:Action){
             ]
         }
     }
-
+    return state;
 
 
 
@@ -125,11 +129,11 @@ function timersReducer(state:TimerState,action:Action){
 
 
 
-
+//5.step 
 
 export default function TimersContextProvider({children}:TimerContextProviderProps){
     
-    //useReducer Hook
+    //useReducer Hook 10the step
     const [timerState,dispatch] = useReducer(timersReducer, initialState);
 
 

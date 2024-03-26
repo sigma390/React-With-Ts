@@ -6,7 +6,9 @@ export default function Header() {
 
   // consume that context
   // const timerctx = useContext(TimersContext)!; one way
-  //other way to avoid Null 
+  //7the step other way to avoid Null 
+
+  //9th step using it
   const timerCtx = useTimersContext();
   return (
     <header>

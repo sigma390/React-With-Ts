@@ -7,11 +7,14 @@ import { useTimersContext } from '../store/timers-context.tsx';
 
 export default function AddTimer() {
   const form = useRef<FormHandle>(null);
+  //step 14 
   const {addTimer} = useTimersContext()
 
   function handleSaveTimer(data: unknown) {
     const extractedData = data as { name: string; duration: string };
     console.log(extractedData);
+    //here extracted data type of duration is String but we want number hence we desctructure like below
+    addTimer({name:extractedData.name , duration: +extractedData.duration}) //step 15
     form.current?.clear();
   }
 
