@@ -8,7 +8,7 @@ import { useTimersContext } from '../store/timers-context.tsx';
 export default function AddTimer() {
   const form = useRef<FormHandle>(null);
   //step 14 
-  const {addTimer} = useTimersContext()
+  const { addTimer } = useTimersContext()
 
   function handleSaveTimer(data: unknown) {
     const extractedData = data as { name: string; duration: string };
