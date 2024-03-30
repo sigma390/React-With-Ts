@@ -14,7 +14,7 @@ export default function Timers() {
     {timers.map((timer)=> (<li key={timer.name}>
       <Timer {...timer}/>
     </li>))
-  };
+  }
   </ul>)
    
 }
