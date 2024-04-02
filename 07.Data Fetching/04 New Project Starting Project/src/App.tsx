@@ -16,9 +16,16 @@ type RawPost = {
 function App() {
   //create a empty state step 1
   const [fetchedPost, setFetchPost] = useState<BlogPost[]>()
+  //step 8 add a loader
+  const [isFetching, setFetching] = useState(false);
+
+
 
   //to render data useeffect step 3
   useEffect(()=>{
+
+    //step 9  call that setFetching
+    setFetching(true);
     //step 2
     async function fetchPosts(){
 
@@ -33,14 +40,16 @@ function App() {
       
     }
   })
-  
+    //step 10 
+    setFetching(false);
     //to update state after getting data step 5
     setFetchPost(blogposts);
   
     }
 
-  
+    
 
+  
     fetchPosts(); // as await async doesnt work on useeffect we used a Helper functiom
    
   },[])
@@ -49,6 +58,9 @@ function App() {
   let content:ReactNode
   if (fetchedPost) {
     content = <BlogPosts posts={fetchedPost}/>;
+  }
+  if (isFetching) {
+    content = <p id="loading-fallback"> Fetching!!!!!!</p>
   }
 
 
