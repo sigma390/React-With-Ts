@@ -3,6 +3,7 @@ import { get } from "./util/http";
 import { BlogPost } from "./components/BlogPosts";
 import fetchingImg from './assets/data-fetching.png'
 import BlogPosts from './components/BlogPosts';
+import ErrorMessage from "./components/ErrorMessage";
 //type for [posts]
 type RawPost = {
   id:number,
@@ -19,17 +20,25 @@ function App() {
   //step 8 add a loader
   const [isFetching, setFetching] = useState(false);
 
+  //step 12 error state var
+  const [error,setError] = useState<string>();
 
 
   //to render data useeffect step 3
   useEffect(()=>{
 
-    //step 9  call that setFetching
-    setFetching(true);
+    
+    
+
+
+
     //step 2
     async function fetchPosts(){
-
-     const data = (await  get('https://jsonplaceholder.typicode.com/posts')) as RawPost[];//url to get data, and it returns Promise
+    //step 9  call that setFetching
+    setFetching(true);
+      //step 11 error handeling
+    try{
+      const data = (await  get('https://jsonplaceholder.typicode.com/posts')) as RawPost[];//url to get data, and it returns Promise
     
      //to convert into blogPost type step 4
   const blogposts:BlogPost[] = data.map(rawPost=>{
@@ -40,10 +49,23 @@ function App() {
       
     }
   })
-    //step 10 
-    setFetching(false);
+   
     //to update state after getting data step 5
     setFetchPost(blogposts);
+
+    }catch(error){
+      if (error instanceof Error) {
+        setError(error.message)
+      }
+
+      
+
+
+    }
+
+     
+     //step 10 
+     setFetching(false);
   
     }
 
@@ -54,8 +76,17 @@ function App() {
    
   },[])
   
+ 
+
+
   //step 7 to solve undefined error
   let content:ReactNode
+  
+   //step 13 show error on screen
+   if (error) {
+    content = <ErrorMessage text={error}/>
+  }
+
   if (fetchedPost) {
     content = <BlogPosts posts={fetchedPost}/>;
   }
