@@ -7,7 +7,7 @@ export default function Header() {
   const [cartIsVisible, setCartIsVisible] = useState(false);
   //step 20 use the dta
 
-  useCartSelector((state)=> state.cart.items.reduce((val,item)=> val+item.qty,0))//reduce sums up data , accepts a fxn , initial value
+  const carQty = useCartSelector((state)=> state.cart.items.reduce((val,item)=> val+item.qty,0))//reduce sums up data , accepts a fxn , initial value
 
   function handleOpenCartClick() {
     setCartIsVisible(true);
@@ -26,7 +26,7 @@ export default function Header() {
           <h1>Elegant Redux</h1>
         </div>
         <p>
-          <button onClick={handleOpenCartClick}>Cart (0)</button>
+          <button onClick={handleOpenCartClick}>Cart {carQty}</button>
         </p>
       </header>
     </>

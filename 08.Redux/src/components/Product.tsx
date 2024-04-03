@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+
 import { addToCart } from "../store/cart-slice";
 import { useCartDispatch } from "../store/hooks";
 
