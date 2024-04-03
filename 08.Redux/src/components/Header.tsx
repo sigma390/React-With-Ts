@@ -1,9 +1,13 @@
 import { useState } from 'react';
 
 import Cart from './Cart.tsx';
+import { useCartSelector } from '../store/hooks.ts';
 
 export default function Header() {
   const [cartIsVisible, setCartIsVisible] = useState(false);
+  //step 20 use the dta
+
+  useCartSelector((state)=> state.cart.items.reduce((val,item)=> val+item.qty,0))//reduce sums up data , accepts a fxn , initial value
 
   function handleOpenCartClick() {
     setCartIsVisible(true);
