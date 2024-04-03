@@ -1,15 +1,32 @@
-import { useCartSelector } from "../store/hooks";
+import { addToCart, CartItem, removeItem } from "../store/cart-slice";
+import { useCartDispatch, useCartSelector } from "../store/hooks";
 
 export default function CartItems() {
 
 
   // step 21
   const cartItems = useCartSelector(state => state.cart.items)
-  const total = cartItems.reduce((val,item)=>val + item.price*item.qty ,0)
-  const formattedTotalPrice = total.toFixed(2); //limit to 2 decimal
+  const dispatch = useCartDispatch();
+  const totalPrice = cartItems.reduce(
+    (val, item) => val + item.price * item.qty,
+    0
+  );
+  const formattedTotalPrice = totalPrice.toFixed(2); //limit to 2 decimal
+  
+  //step 2 functions
+
+  function handleAddToCart(item:CartItem){
+    dispatch(addToCart(item))
+    
+  }
+  function handleRemoveFromCart(id:string){
+    dispatch(removeItem(id))
+    
+  }
+  
   return (
     <div id="cart">
-      <p>No items in cart!</p>
+      {cartItems.length === 0 && <p>No items in cart!</p>}
 
       <ul id="cart-items">
           {cartItems.map((item) => {
@@ -25,7 +42,7 @@ export default function CartItems() {
                   <button onClick={() => handleRemoveFromCart(item.id)}>
                     -
                   </button>
-                  <span>{item.quantity}</span>
+                  <span>{item.qty}</span>
                   <button onClick={() => handleAddToCart(item)}>+</button>
                 </div>
               </li>

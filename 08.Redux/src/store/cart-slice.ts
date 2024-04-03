@@ -2,7 +2,7 @@ import { createSlice ,  type PayloadAction } from "@reduxjs/toolkit";
 
 //step 4 create typee of Data the below slice can manage
 
-type CartItem = {
+export type CartItem = {
     id:string,
     title:string,
     price:number,
@@ -25,6 +25,7 @@ export const cartSlice = createSlice({
     initialState,
     //step 6 Create Reducers
     reducers:{
+       
         //add to cart reducer
         // action Type and also <> extract data required only
         addToCart(state, action:PayloadAction<{id:string; title:string;price:number}>){
@@ -47,8 +48,8 @@ export const cartSlice = createSlice({
         },
 
         //step 9 remove items fro m cart
-        removeItem(state, action : PayloadAction<{id:string}>){
-            const itemIndex = state.items.findIndex((item)=> item.id=== action.payload.id);
+        removeItem(state, action : PayloadAction<string>){
+            const itemIndex = state.items.findIndex((item)=> item.id=== action.payload);
             if (state.items[itemIndex].qty === 1) {
                 state.items.splice(itemIndex,1);
             }
