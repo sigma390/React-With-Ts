@@ -23,7 +23,7 @@ export default function Header() {
       <header id="main-header">
         <div id="main-title">
           <img src="logo.png" alt="Elegant model" />
-          <h1>Elegant Store</h1>
+          <h1>Elegant Fashion Store</h1>
         </div>
         <p>
           <button onClick={handleOpenCartClick}>Cart {carquantity}</button>
