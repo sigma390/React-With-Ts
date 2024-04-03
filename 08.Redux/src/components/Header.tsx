@@ -7,7 +7,7 @@ export default function Header() {
   const [cartIsVisible, setCartIsVisible] = useState(false);
   //step 20 use the dta
 
-  const carQty = useCartSelector((state)=> state.cart.items.reduce((val,item)=> val + item.qty,0))//reduce sums up data , accepts a fxn , initial value
+  const carquantity = useCartSelector((state)=> state.cart.items.reduce((val,item)=> val + item.quantity,0))//reduce sums up data , accepts a fxn , initial value
 
   function handleOpenCartClick() {
     setCartIsVisible(true);
@@ -23,10 +23,10 @@ export default function Header() {
       <header id="main-header">
         <div id="main-title">
           <img src="logo.png" alt="Elegant model" />
-          <h1>Elegant Redux</h1>
+          <h1>Elegant Store</h1>
         </div>
         <p>
-          <button onClick={handleOpenCartClick}>Cart {carQty}</button>
+          <button onClick={handleOpenCartClick}>Cart {carquantity}</button>
         </p>
       </header>
     </>

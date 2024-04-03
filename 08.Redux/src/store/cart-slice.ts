@@ -6,7 +6,7 @@ export type CartItem = {
     id:string,
     title:string,
     price:number,
-    qty:number
+    quantity: number;
 
 
 }
@@ -28,33 +28,34 @@ export const cartSlice = createSlice({
        
         //add to cart reducer
         // action Type and also <> extract data required only
-        addToCart(state, action:PayloadAction<{id:string; title:string;price:number}>){
+        addToCart(state,
+             action:PayloadAction<{ id:string; title:string;price:number }>){
             //STEP 7 USE state and action
-            const itemIndex = state.items.findIndex((item)=>{
-                item.id=== action.payload.id
-            });
+            const itemIndex = state.items.findIndex(
+                (item)=>item.id=== action.payload.id );
 
             //step 8 check id found or not
             if (itemIndex>=0) {
-                state.items[itemIndex].qty++;
+                state.items[itemIndex].quantity++;
             }
             else{
                 //if its nnot exists
-                //but payload doesnt have qty property so we add exxtraa qty prop
-                state.items.push({...action.payload,qty:1})
+                //but payload doesnt have quantity property so we add exxtraa quantity prop
+                state.items.push({...action.payload, quantity: 1})
             }
 
 
         },
 
         //step 9 remove items fro m cart
-        removeItem(state, action : PayloadAction<string>){
-            const itemIndex = state.items.findIndex((item)=> item.id=== action.payload);
-            if (state.items[itemIndex].qty === 1) {
+        removeFromCart(state, action : PayloadAction<string>){
+            const itemIndex = state.items.findIndex(
+                (item)=> item.id === action.payload);
+            if (state.items[itemIndex].quantity === 1) {
                 state.items.splice(itemIndex,1);
             }
             else{
-                state.items[itemIndex].qty--;
+                state.items[itemIndex].quantity--;
             }
         }
 
@@ -64,4 +65,4 @@ export const cartSlice = createSlice({
 //step 12 use dispatch they create custom actions named below
 
 
-export const {addToCart ,  removeItem} = cartSlice.actions;
+export const {addToCart ,  removeFromCart} = cartSlice.actions;

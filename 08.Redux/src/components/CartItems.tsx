@@ -1,4 +1,4 @@
-import { addToCart, CartItem, removeItem } from "../store/cart-slice";
+import { addToCart, CartItem, removeFromCart } from "../store/cart-slice";
 import { useCartDispatch, useCartSelector } from "../store/hooks";
 
 export default function CartItems() {
@@ -8,7 +8,7 @@ export default function CartItems() {
   const cartItems = useCartSelector(state => state.cart.items)
   const dispatch = useCartDispatch();
   const totalPrice = cartItems.reduce(
-    (val, item) => val + item.price * item.qty,
+    (val, item) => val + item.price * item.quantity,
     0
   );
   const formattedTotalPrice = totalPrice.toFixed(2); //limit to 2 decimal
@@ -20,7 +20,7 @@ export default function CartItems() {
     
   }
   function handleRemoveFromCart(id:string){
-    dispatch(removeItem(id))
+    dispatch(removeFromCart(id))
     
   }
   
@@ -42,7 +42,7 @@ export default function CartItems() {
                   <button onClick={() => handleRemoveFromCart(item.id)}>
                     -
                   </button>
-                  <span>{item.qty}</span>
+                  <span>{item.quantity}</span>
                   <button onClick={() => handleAddToCart(item)}>+</button>
                 </div>
               </li>
