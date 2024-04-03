@@ -59,3 +59,8 @@ export const cartSlice = createSlice({
 
     }
 }); //takes object as arguement
+
+//step 12 use dispatch they create custom actions named below
+
+
+export const {addToCart ,  removeItem} = cartSlice.actions;
