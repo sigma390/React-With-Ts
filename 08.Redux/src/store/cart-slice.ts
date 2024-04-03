@@ -28,7 +28,33 @@ export const cartSlice = createSlice({
         //add to cart reducer
         // action Type and also <> extract data required only
         addToCart(state, action:PayloadAction<{id:string; title:string;price:number}>){
+            //STEP 7 USE state and action
+            const itemIndex = state.items.findIndex((item)=>{
+                item.id=== action.payload.id
+            });
 
+            //step 8 check id found or not
+            if (itemIndex>=0) {
+                state.items[itemIndex].qty++;
+            }
+            else{
+                //if its nnot exists
+                //but payload doesnt have qty property so we add exxtraa qty prop
+                state.items.push({...action.payload,qty:1})
+            }
+
+
+        },
+
+        //step 9 remove items fro m cart
+        removeItem(state, action : PayloadAction<{id:string}>){
+            const itemIndex = state.items.findIndex((item)=> item.id=== action.payload.id);
+            if (state.items[itemIndex].qty === 1) {
+                state.items.splice(itemIndex,1);
+            }
+            else{
+                state.items[itemIndex].qty--;
+            }
         }
 
     }
